@@ -1,9 +1,25 @@
-import flask
+import requests
+import json
 
-application = flask.Flask(__name__)
-api = Api(application)
+#Python FotoFriend API
+
+class FotoFriend():
+	def __init__(self):
+		#stuff
+
+	def login(self, username):
+		#stuff
+
+	def uploadImage(self):
+		#stuff
+
+	def deleteImage(self):
+		#stuff
+
+	def filter(self):
+
+
 
 
 if __name__ == '__main__':
-    application.debug = False
-    application.run()
+    app.run(debug=false)
