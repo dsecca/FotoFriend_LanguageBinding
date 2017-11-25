@@ -25,6 +25,13 @@ class FotoFriend():
 
         return response
 
+    def deleteImage(self, imageUrl, sessionUsername):
+
+        headers = {'Content-Type': 'application/json'}
+        data = json.dumps({'url': imageUrl, 'username': sessionUsername})
+        response = requests.post("http://%s/deleteImage" % self.http_server, data = data, headers = headers)
+        return response
+
     #Check whether the filename extension is allowed 
     def checkFileExtension(filename):
         return '.' in filename and \
