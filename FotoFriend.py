@@ -31,15 +31,15 @@ class FotoFriend():
         response = requests.post("http://%s/deleteImage" % self.http_server, data = data, headers = headers)
         return response
 
-    # def filter(self, , keywordsList, sessionUsername):
-    #     tag_list = []
-    #     for keyword in keywordsList:
-    #         tag_list.append(keyword)
+    def filter(self, keywordsList, sessionUsername):
+        tag_list = []
+        for keyword in keywordsList:
+            tag_list.append(keyword)
 
-    #     headers = {'Content-Type': 'application/json'}
-    #     data = json.dumps({'keywords': tag_list, 'username': sessionUsername})
-    #     response = requests.post("http://%s/filter" % self.ttp_server, data = data, headers = headers)
-    #     return response.json()
+        headers = {'Content-Type': 'application/json'}
+        data = json.dumps({'keywords': tag_list, 'username': sessionUsername})
+        response = requests.post("http://%s/filter" % self.http_server, data = data, headers = headers)
+        return response.json()
 
     #Check whether the filename extension is allowed 
     def checkFileExtension(filename):
