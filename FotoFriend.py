@@ -19,6 +19,7 @@ class FotoFriend():
         data = json.dumps({'username': username})
         response = requests.post("http://%s/login" % self.http_server, data = data, headers = headers)
 
+        print("FOTO_FRIEND_LOGIN: Success")
         return response.json()
 
     def uploadImage(self, fileObject, fileName, sessionUsername):
@@ -29,6 +30,8 @@ class FotoFriend():
             response = requests.post("http://%s/storeImage" % self.http_server, data=dict(file=base64.b64encode(fileObject), filename=fileName, username=sessionUsername))
             if response.status_code == 200:
                 uploadStatus = 1
+
+        print("FOTO_FRIEND_UPLOAD: Success")        
         return uploadStatus
 
     def deleteImage(self, imageUrl, sessionUsername):
@@ -36,6 +39,8 @@ class FotoFriend():
         headers = {'Content-Type': 'application/json'}
         data = json.dumps({'url': imageUrl, 'username': sessionUsername})
         response = requests.post("http://%s/deleteImage" % self.http_server, data = data, headers = headers)
+
+        print("FOTO_FRIEND_DELETE: Success")
         return response
 
     def filter(self, keywordsList, sessionUsername):
@@ -46,6 +51,8 @@ class FotoFriend():
         headers = {'Content-Type': 'application/json'}
         data = json.dumps({'keywords': tag_list, 'username': sessionUsername})
         response = requests.post("http://%s/filter" % self.http_server, data = data, headers = headers)
+
+        print("FOTO_FRIEND_FILTER: Success")
         return response.json()
 
     #Check whether the filename extension is allowed 
