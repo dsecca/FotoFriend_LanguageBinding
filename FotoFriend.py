@@ -6,11 +6,12 @@ import base64
 
 #Python FotoFriend API
 
+ALLOWED_EXTENSIONS = set(['jpeg', 'jpg', 'png'])
+
 class FotoFriend():
     def __init__(self):
         #Credentials
         self.http_server = "fotofriendserver.us-west-2.elasticbeanstalk.com"
-        self.ALLOWED_EXTENSIONS = set(['jpeg', 'jpg', 'png'])
 
     def login(self, username):
         #Connect to FotoFriend server
@@ -21,8 +22,14 @@ class FotoFriend():
         return response.json()
 
     def uploadImage(self, fileObject, fileName, sessionUsername):
-        response = requests.post("http://%s/storeImage" % self.http_server, data=dict(file=base64.b64encode(fileObject), filename=fileName, username=sessionUsername))
-        return response
+        if not FotoFriend.checkFileExtension(fileName):
+            print("FOTO_FRIEND_UPLOAD: Invalid file extenstion")
+            uploadStatus = 0
+        else:
+            response = requests.post("http://%s/storeImage" % self.http_server, data=dict(file=base64.b64encode(fileObject), filename=fileName, username=sessionUsername))
+            if response.status_code == 200:
+                uploadStatus = 1
+        return uploadStatus
 
     def deleteImage(self, imageUrl, sessionUsername):
 
