@@ -20,7 +20,7 @@ build_number = None
 
 if 'TRAVIS_BUILD_NUMBER' in os.environ:
     build_number = os.environ['TRAVIS_BUILD_NUMBER']
-else
+else:
     build_number = 'DEV'
 
 setup(
