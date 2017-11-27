@@ -3,7 +3,13 @@ python: 3.4
 branches:
   only:
   - master
-script: 
+script:
+  - pip install -e .
   - pytest
 addons:
   artifacts: true
+deploy:
+  provider: pypi
+  username: $PYPI_USERNAME
+  password: $PYPI_PASSWORD
+  distributions: "sdist bdist_wheel"
